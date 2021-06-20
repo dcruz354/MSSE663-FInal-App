@@ -1,0 +1,50 @@
+<div class="centered-content has-background-grey-light">
+    <div class="home-container">
+      <div class="home-selected-container has-background-light">
+        <h2>Your User Information</h2>
+        <p><strong>First Name:</strong> {{authService.currentUserValue.firstName}}</p>
+        <p><strong>Last Name:</strong> {{authService.currentUserValue.lastName}}</p>
+        <p><strong>Username:</strong> {{authService.currentUserValue.username}}</p>
+        <hr>
+        <div>
+          <h2 class="title has-text-primary">Edit User Information</h2>
+          <form name="form" [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+            <div class="form-group" [ngClass]="{ 'has-error': submitted && f.firstName.errors }">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" name="firstName" formControlName="firstName" id="firstName"
+                     required/>
+              <div *ngIf="submitted && f.firstName.errors" class="help-block">First Name is required</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': submitted && f.lastName.errors }">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" name="lastName" formControlName="lastName" id="lastName"
+                     required/>
+              <div *ngIf="submitted && f.lastName.errors" class="help-block">Last Name is required</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': submitted && f.password.errors }">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" formControlName="password" id="password"
+                     required/>
+              <div *ngIf="submitted && f.password.errors" class="help-block">Password is required</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': submitted && f.confirmPassword.errors }">
+              <label for="confirmPassword">Re-type Password</label>
+              <input type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword"
+                     id="confirmPassword"
+                     required/>
+              <div *ngIf="submitted && f.confirmPassword.errors" class="help-block">confirmPassword is required</div>
+            </div>
+            <div *ngIf="submitted && error" class="form-group" [ngClass]="{ 'has-error': submitted && error }">
+              <div class="help-block">{{error}}</div>
+            </div>
+            <div *ngIf="updateUserForm.controls.confirmPassword.errors?.MatchPassword" class="form-group has-error">
+              <div class="help-block">Passwords do not match</div>
+            </div>
+            <div class="form-group">
+              <button [disabled]="loading" class="button is-grey-lighter has-background-gray" type="submit">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

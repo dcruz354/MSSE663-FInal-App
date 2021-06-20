@@ -1,0 +1,10 @@
+<div class="orderComponent">
+    <div *ngIf="orderList$ | async as orders">
+        <ul class="orderList">
+            <li *ngFor="let order of orders">
+                {{ order }}
+            </li>
+        </ul>
+    </div>
+    <p><a routerLink="/order-home">Dima Calculator</a></p>
+</div>

@@ -1,0 +1,40 @@
+<div class="centered-content has-background-grey-light">
+    <div class="home-container">
+      <div class="home-selected-container has-background-light">
+        <h2 class="title has-text-primary">Calculate Savings</h2>
+        <form name="form" [formGroup]="newOrderForm" (ngSubmit)="addOrder()">
+          <div class="form-group" [ngClass]="{ 'has-error': submitted && field.title.errors }">
+            <label for="title">Order name</label>
+            <input type="text" class="form-control" name="title" formControlName="title" id="title" required/>
+            <div *ngIf="submitted && field.title.errors" class="help-block">Sorry, but a name is required</div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': submitted && field.numberOfHoles.errors }">
+            <label for="numberOfHoles">Number of Holes</label>
+            <input type="textarea" class="form-control" name="numberOfHoles" formControlName="numberOfHoles" id="numberOfHoles"
+                   required />
+            <div *ngIf="submitted && field.numberOfHoles.errors" class="help-block">
+                Please enter number of holes.
+            </div>
+          </div>
+          <div class="form-group" [ngClass]="{ 'has-error': submitted && field.size.errors }">
+            <label for="size">Size</label>
+            <input type="textarea" class="form-control" name="size" formControlName="size" id="size"
+                   required />
+            <div *ngIf="submitted && field.size.errors" class="help-block">
+                Please enter pipe size.
+            </div>
+          </div>
+          <div *ngIf="submitted && error" class="form-group" [ngClass]="{ 'has-error': submitted && error }">
+            <div class="help-block">{{error}}</div>
+          </div>
+          <div class="form-group">
+            <button [disabled]="loading" 
+                    class="button is-grey-lighter has-background-gray">
+                    Calculate Savings
+            </button>
+            <p><a routerLink="/order-list">Views Saved Orders</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
