@@ -1,7 +1,7 @@
 import { PasswordValidation } from './../_helpers/validators';
 import { AuthService } from './../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators'
 
@@ -22,8 +22,8 @@ export class AccountComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
+    public router: Router,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class AccountComponent implements OnInit {
 
   get f() { return this.updateUserForm.controls;}
 
-  udpateUser() {
+  updateUser() {
     this.authService.update(this.f.firstName.value, this.f.lastName.value, this.f.passwor.value)
     .pipe(first())
     .subscribe(

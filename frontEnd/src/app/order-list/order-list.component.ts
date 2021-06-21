@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { OrdersModel } from '../../../../restful-api-mongo/src/models/order.model'
+import { OrdersModel } from '../../../../../DIMACalculatorAppBackend/restful-api-mongo/src/models/order.model'
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../_services/order.service';
 
@@ -11,7 +11,7 @@ import { OrderService } from '../_services/order.service';
 })
 export class OrderListComponent implements OnInit {
   //orderLists$: Observable<OrdersModel[]> = new Observable;
-  orderList$: Observable<OrdersModel[]>;
+  orderList$: Observable<OrdersModel[]> = new Observable;
   order: Observable<OrdersModel> = new Observable;
 
   constructor(

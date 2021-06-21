@@ -1,5 +1,5 @@
 import { catchError, map} from 'rxjs/operators';
-import { OrdersModel } from './../../../../restful-api-mongo/src/models/order.model';
+import { OrdersModel } from '../models/order/order.model'; 
 import { Router } from '@angular/router';
 import { Observable, Subject, throwError, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -20,9 +20,10 @@ export class OrderService {
     API_URL: string = environment.apiUrl;
     headers = new HttpHeaders().set('Content-Type', 'application/json');
         
-    private orderToUpdate$: Observable<OrdersModel>;
+    private orderToUpdate$?: Observable<OrdersModel>;
 
-    selectedOrder: Subject<OrdersModel> = new BehaviorSubject<OrdersModel>(new OrdersModel(null, null, null, null));
+
+    selectedOrder: Subject<OrdersModel> = new BehaviorSubject<OrdersModel>(new OrdersModel('', 0, 0, 0));
 
     constructor(private httpClient: HttpClient, public router: Router) {
     }

@@ -4,7 +4,8 @@ import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs/operators'
-import { User } from '../../../../restful-api-mongo/src/models/user.model';
+import { User } from '../../../../../DIMACalculatorAppBackend/restful-api-mongo/src/models/user.model';
+
 
 const htttpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json'})}
 

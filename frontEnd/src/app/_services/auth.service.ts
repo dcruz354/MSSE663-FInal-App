@@ -2,7 +2,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from './../../../../restful-api-mongo/src/models/user.model';
+import { User } from './../../../../../DIMACalculatorAppBackend/restful-api-mongo/src/models/user.model';
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, throwError } from "rxjs";
 
@@ -19,11 +19,11 @@ export class AuthService {
         private router: Router,
         private http: HttpClient
     ) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser$') || '{}'));
         this.currentUser$ = this.currentUserSubject.asObservable();
     }
 
-    public get userValue(): User {
+    public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
 
@@ -33,7 +33,7 @@ export class AuthService {
             const user = res.user;
             if(res.user && res.token) {
                 localStorage.setItem('access_token', res.token);
-                localStorage.setItem('currentUser', JSON.stringify(res.user));
+                localStorage.setItem('currentUser$', JSON.stringify(res.user));
                 this.getUserProfile(res.user._id).subscribe((result) => {
                     this.currentUser$ = res.user;
                 });
@@ -50,7 +50,7 @@ export class AuthService {
             const user = res.user;
             if (res.user && res.token) {
                 localStorage.setItem('access_token', res.token);
-                localStorage.setItem('currentUser', JSON.stringify(res.user));
+                localStorage.setItem('currentUser$', JSON.stringify(res.user));
                 this.getUserProfile(res.user._id).subscribe((res) => {
                     this.currentUser$ = res.user;
                 });
@@ -65,7 +65,7 @@ export class AuthService {
         return this.http.post<any>(`${this.API_URL}/users/logout`, {})
         .pipe(catchError(this.handleError))
         .subscribe((res: any) => {
-            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser') == null) {
+            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser$') == null) {
                 window.alert('Successfully Logged out');
                 this.router.navigate(['/login']);
             }
@@ -76,7 +76,7 @@ export class AuthService {
         return this.http.post<any>(`${this.API_URL}/users/logoutAll`, {})
         .pipe(catchError(this.handleError))
         .subscribe((res: any) => {
-            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser') == null) {
+            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser$') == null) {
                 window.alert('Successfully logged out of all devices');
                 this.router.navigate(['login']);
             }
@@ -106,7 +106,7 @@ export class AuthService {
         .pipe(map((res: any) => {
             this.getUserProfile(res._id).subscribe((result) => {
                 this.currentUser$ = result;
-                localStorage.setItem('currentUser', JSON.stringify(result));
+                localStorage.setItem('currentUser$', JSON.stringify(result));
                 return result;
             });
         }),

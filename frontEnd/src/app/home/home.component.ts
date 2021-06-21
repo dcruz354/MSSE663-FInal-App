@@ -1,7 +1,8 @@
 import { AuthService } from './../_services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
-import { User } from './../../../../restful-api-mongo/src/models/user.model';
+import { User } from './../../../../../DIMACalculatorAppBackend/restful-api-mongo/src/models/user.model'
+
 
 
 @Component({
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   user: User;
   constructor(private authService: AuthService) {
-    this.user = this.authService.userValue;
+    this.user = this.authService.currentUserValue;
    }
 
   ngOnInit(): void {
