@@ -16,10 +16,10 @@ export class AuthService {
     public currentUser$: Observable<User>;
 
     constructor(
-        private router: Router,
+        public router: Router,
         private http: HttpClient
     ) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser$') || '{}'));
+        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
         this.currentUser$ = this.currentUserSubject.asObservable();
     }
 
@@ -33,7 +33,7 @@ export class AuthService {
             const user = res.user;
             if(res.user && res.token) {
                 localStorage.setItem('access_token', res.token);
-                localStorage.setItem('currentUser$', JSON.stringify(res.user));
+                localStorage.setItem('currentUser', JSON.stringify(res.user));
                 this.getUserProfile(res.user._id).subscribe((result) => {
                     this.currentUser$ = res.user;
                 });
@@ -50,7 +50,7 @@ export class AuthService {
             const user = res.user;
             if (res.user && res.token) {
                 localStorage.setItem('access_token', res.token);
-                localStorage.setItem('currentUser$', JSON.stringify(res.user));
+                localStorage.setItem('currentUser', JSON.stringify(res.user));
                 this.getUserProfile(res.user._id).subscribe((res) => {
                     this.currentUser$ = res.user;
                 });
@@ -65,7 +65,7 @@ export class AuthService {
         return this.http.post<any>(`${this.API_URL}/users/logout`, {})
         .pipe(catchError(this.handleError))
         .subscribe((res: any) => {
-            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser$') == null) {
+            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser') == null) {
                 window.alert('Successfully Logged out');
                 this.router.navigate(['/login']);
             }
@@ -76,9 +76,9 @@ export class AuthService {
         return this.http.post<any>(`${this.API_URL}/users/logoutAll`, {})
         .pipe(catchError(this.handleError))
         .subscribe((res: any) => {
-            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser$') == null) {
+            if(localStorage.removeItem('access_token') == null && localStorage.removeItem('currentUser') == null) {
                 window.alert('Successfully logged out of all devices');
-                this.router.navigate(['login']);
+                this.router.navigate(['/login']);
             }
         });
     }
@@ -106,7 +106,7 @@ export class AuthService {
         .pipe(map((res: any) => {
             this.getUserProfile(res._id).subscribe((result) => {
                 this.currentUser$ = result;
-                localStorage.setItem('currentUser$', JSON.stringify(result));
+                localStorage.setItem('currentUser', JSON.stringify(result));
                 return result;
             });
         }),

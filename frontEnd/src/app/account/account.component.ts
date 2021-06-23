@@ -41,7 +41,12 @@ export class AccountComponent implements OnInit {
   get f() { return this.updateUserForm.controls;}
 
   updateUser() {
-    this.authService.update(this.f.firstName.value, this.f.lastName.value, this.f.passwor.value)
+    this.submitted = true;
+    if(this.updateUserForm.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.authService.update(this.f.firstName.value, this.f.lastName.value, this.f.password.value)
     .pipe(first())
     .subscribe(
       data => {

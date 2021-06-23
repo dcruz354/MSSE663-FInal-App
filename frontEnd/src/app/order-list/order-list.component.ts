@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { OrdersModel } from '../../../../../DIMACalculatorAppBackend/restful-api-mongo/src/models/order.model'
+import { OrdersModel } from '../../../../../DIMACalculatorAppBackend/restful-api-mongo/src/models/to-order-list.model'
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderService } from '../_services/order.service';
 

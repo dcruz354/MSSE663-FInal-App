@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'register',   component: RegisterComponent},
   { path: 'home',       component: HomeComponent},
   { path: 'order-home', component: OrderHomeComponent},
-  { path: 'order-list', component:OrderListComponent},
+  { path: 'order-list', component: OrderListComponent},
   { path: 'account',    component: AccountComponent,
     canActivate: [AuthGuard],
   },
@@ -24,7 +24,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })

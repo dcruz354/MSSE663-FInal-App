@@ -38,7 +38,7 @@ export class OrderHomeComponent implements OnInit {
 
   savings: number;
 
-  calculateSavings() {
+  calculateSavings(): number {
     let stringToConvertNumberOfHoles = this.field.numberOfHoles.value;
     let stringToConvertSize = this.field.size.value;
 
@@ -55,6 +55,8 @@ export class OrderHomeComponent implements OnInit {
     } else{
         console.log('Not a Number');
     }
+
+    return this.savings;
   }
 
   addOrder() {
@@ -64,13 +66,27 @@ export class OrderHomeComponent implements OnInit {
     }
 
     this.loading = true;
-    this.calculateSavings();
+    let sav = this.calculateSavings();
+
+    let stringToConvertNumberOfHoles = this.field.numberOfHoles.value;
+    let stringToConvertSize = this.field.size.value;
+
+    let numberValueNumberOfHoles = 0;
+    let numberValueSize = 0;
+
+    if(!isNaN(Number(stringToConvertNumberOfHoles)) && !isNaN(Number(stringToConvertSize))){
+      numberValueNumberOfHoles = Number(stringToConvertNumberOfHoles);
+      numberValueSize = Number(stringToConvertSize);      
+    } else{
+        console.log('Not a Number');
+    }
+
 
     this.orderService.saveOrder(
       this.field.title.value,
-      this.field.numberOfHoles.value,
-      this.savings,
-      this.field.size.value
+      numberValueNumberOfHoles,
+      sav,
+      numberValueSize
     )
     .pipe(first())
     .subscribe(
