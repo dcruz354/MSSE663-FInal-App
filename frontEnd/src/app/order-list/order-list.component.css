@@ -1,0 +1,35 @@
+.rTable {
+    display: table;
+    margin: auto;
+    width: 758px;
+    height: 100px;
+    border: solid 4px #000;
+}
+
+.rTableRow {
+    display: table-row;
+    margin: auto;
+    padding: 10px;
+}
+
+.rTableHead {
+    display: table-cell;
+    padding: 1em;
+    margin: auto;
+    text-align: center;
+    background-color: black;
+    border: solid 1px white;
+    font-size: 1.2 em;
+    color: white;
+}
+
+.rTableCell {
+    display: table-cell;
+    padding: 1em;
+    margin: auto;
+    text-align: center;
+    background-color: cornflowerblue;
+    border-right: solid 1px white;
+    border-left: solid 1px white;
+    border-top: solid 1px white;
+}

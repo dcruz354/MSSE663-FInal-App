@@ -15,7 +15,7 @@
     </div>
     <div class="field">
         <button [disabled]="loading" class="button is-success">
-            <span *ngif="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <div *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></div>
             Login
         </button>
         <a routerLink="/register" class="btn btn-link">Register</a>

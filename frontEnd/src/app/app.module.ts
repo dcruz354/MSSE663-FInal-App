@@ -15,6 +15,7 @@ import { AccountComponent } from './account/account.component';
 import { OrderHomeComponent } from './order-home/order-home.component';
 import { OrderListComponent } from './order-list/order-list.component';
 import { HomeComponent } from './home/home.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -35,7 +36,8 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

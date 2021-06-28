@@ -1,12 +1,12 @@
-<div class="centered-content has-background-grey-light">
+<div class="centered-content has-background-gray-light">
     <div class="home-container">
       <div class="home-selected-container has-background-light">
-        <h2 class="title has-text-primary">Calculate Savings</h2>
+        <h2 class="name has-text-primary">Calculate Savings</h2>
         <form name="form" [formGroup]="newOrderForm" (ngSubmit)="addOrder()">
-          <div class="form-group" [ngClass]="{ 'has-error': submitted && field.title.errors }">
-            <label for="title">Order name</label>
-            <input type="text" class="form-control" name="title" formControlName="title" id="title" required/>
-            <div *ngIf="submitted && field.title.errors" class="help-block">Sorry, but a name is required</div>
+          <div class="form-group" [ngClass]="{ 'has-error': submitted && field.name.errors }">
+            <label for="name">Order name</label>
+            <input type="text" class="form-control" name="name" formControlName="name" id="name" required/>
+            <div *ngIf="submitted && field.name.errors" class="help-block">Sorry, but a name is required</div>
           </div>
           <div class="form-group" [ngClass]="{ 'has-error': submitted && field.numberOfHoles.errors }">
             <label for="numberOfHoles">Number of Holes</label>
@@ -33,6 +33,7 @@
                     Calculate Savings
             </button>
             <p><a routerLink="/order-list" class="btn btn-link">Views Saved Orders</a></p>
+            <p><a routerLink="/home" class="btn btn-link">Home</a></p>
           </div>
         </form>
       </div>

@@ -1,10 +1,20 @@
 <div class="orderComponent">
     <div *ngIf="orderList$ | async as orders">
-        <ul class="orderList">
-            <li *ngFor="let order of orders">
-                {{ order }}
-            </li>
-        </ul>
+        <div class="rTable">
+            <div class="rTableRow">
+                <div class="rTableHead">Order Name</div>
+                <div class="rTableHead">Number of holes</div>
+                <div class="rTableHead">Pipe Size</div>
+                <div class="rTableHead">Savings</div>
+            </div>
+            <div class="rTableRow" *ngFor="let order of orders">
+                <div class="rTableCell">{{ order.name }}</div>
+                <div class="rTableCell">{{ order.numbrOfHoles }}</div>
+                <div class="rTableCell">{{ order.size  }} </div>
+                <div class="rTableCell">{{ order.savings }} </div>
+            </div>
+        </div>  
     </div>
     <p><a routerLink="/order-home" class="btn btn-link">Dima Calculator</a></p>
+    <p><a routerLink="/home" class="btn btn-link">Home</a></p>
 </div>

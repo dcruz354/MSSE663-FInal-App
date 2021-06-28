@@ -1,0 +1,11 @@
+.container {
+    background-color: turquoise;
+    text-align: center;
+}
+
+.btn btn-link {
+    margin-right: 200px;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}

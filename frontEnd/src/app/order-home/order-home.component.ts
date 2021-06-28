@@ -83,7 +83,7 @@ export class OrderHomeComponent implements OnInit {
 
 
     this.orderService.saveOrder(
-      this.field.title.value,
+      this.field.name.value,
       numberValueNumberOfHoles,
       sav,
       numberValueSize
